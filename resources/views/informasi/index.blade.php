@@ -82,7 +82,10 @@
             @foreach ($galeri as $foto)
                 <div class="galeri-item"
                      data-galeri-id="{{ $foto['id'] }}"
-                     onclick="bukaGaleriModal('{{ asset('images/'.$foto['gambar']) }}', '{{ $foto['judul'] }}', {{ $foto['id'] }})">
+                     data-src="{{ asset('images/'.$foto['gambar']) }}"
+                     data-judul="{{ $foto['judul'] }}"
+                     data-keterangan="{{ $foto['keterangan'] }}"
+                     onclick="bukaGaleriModal(this)">
                     <img src="{{ asset('images/'.$foto['gambar']) }}" alt="{{ $foto['judul'] }}" loading="lazy">
 
                     <button type="button" class="galeri-like-btn" aria-label="Suka foto ini">
@@ -100,28 +103,65 @@
 </div>
 
 
-<div id="galeriModal" class="galeri-modal" onclick="tutupGaleriModal()">
-    <span class="galeri-modal-close" onclick="tutupGaleriModal()">&times;</span>
-    <img id="galeriModalImg" src="" alt="">
-    <p id="galeriModalCaption" class="galeri-modal-caption"></p>
+<div id="galeriModal" class="galeri-modal" onclick="if (event.target === this) tutupGaleriModal()">
+    <button type="button" class="galeri-modal-close" onclick="tutupGaleriModal()" aria-label="Tutup">&times;</button>
 
-    <button type="button" id="galeriModalLike" class="galeri-like-btn galeri-like-btn-modal" aria-label="Suka foto ini">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
-        <span class="galeri-like-count">0</span>
-    </button>
+    <div class="galeri-card">
+        <div class="galeri-card-media">
+            <img id="galeriModalImg" src="" alt="">
+        </div>
+
+        <div class="galeri-card-info">
+            <span class="galeri-card-label">Galeri SMKN 4 Bogor</span>
+            <h3 id="galeriModalCaption" class="galeri-card-title"></h3>
+            <span class="galeri-card-bar"></span>
+            <p id="galeriModalDesc" class="galeri-card-desc"></p>
+
+            <div class="galeri-card-actions">
+                <button type="button" id="galeriModalLike" class="galeri-like-btn galeri-like-btn-modal" aria-label="Suka foto ini">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <span class="galeri-like-count">0</span>
+                </button>
+
+                <a id="galeriModalDownload" class="galeri-download-btn" href="#" download>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Unduh Foto
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    function bukaGaleriModal(src, judul, id) {
-        document.getElementById('galeriModalImg').src = src;
-        document.getElementById('galeriModalCaption').textContent = judul;
+    function bukaGaleriModal(el) {
+        var d = el.dataset;
+
+        document.getElementById('galeriModalImg').src = d.src;
+        document.getElementById('galeriModalCaption').textContent = d.judul;
+        document.getElementById('galeriModalDesc').textContent = d.keterangan || '';
+
+        var ext = (d.src.split('?')[0].split('.').pop() || 'jpg').toLowerCase();
+        var nama = (d.judul || 'foto-galeri')
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '') || 'foto-galeri';
+
+        var unduh = document.getElementById('galeriModalDownload');
+        unduh.href = d.src;
+        unduh.setAttribute('download', nama + '.' + ext);
+
         document.getElementById('galeriModal').classList.add('is-open');
         document.body.style.overflow = 'hidden';
 
-        if (window.galeriLikeOpen) window.galeriLikeOpen(id);
+        if (window.galeriLikeOpen) window.galeriLikeOpen(d.galeriId);
     }
 
     function tutupGaleriModal() {

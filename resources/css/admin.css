@@ -436,7 +436,6 @@
 
 /* ============ TABEL PRODUK KHUSUS (TANPA SCROLL HORIZONTAL) ============ */
 
-/* Matikan scroll horizontal pada pembungkus tabel produk */
 .admin-table-wrap:has(.admin-produk-table),
 .admin-table-wrap-noscroll {
     overflow-x: hidden;
@@ -1292,69 +1291,6 @@
     }
 }
 
-/* ============ DASHBOARD: TABEL RINGKASAN ============ */
-
-.admin-dashboard-table td:nth-child(3),
-.admin-dashboard-table td:nth-child(4),
-.admin-dashboard-table td:nth-child(5) {
-    text-align: center;
-}
-
-.admin-dashboard-table th:nth-child(3),
-.admin-dashboard-table th:nth-child(4),
-.admin-dashboard-table th:nth-child(5) {
-    text-align: center;
-}
-
-.admin-dashboard-table td:first-child {
-    text-align: center;
-}
-
-.admin-dashboard-table th:last-child,
-.admin-dashboard-table td:last-child {
-    width: auto;
-    white-space: nowrap;
-}
-
-/* ============ POSISI GAMBAR DI TABEL ============ */
-
-.admin-dashboard-table tbody td:nth-child(1) .admin-thumb {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ============ DASHBOARD TABLE - POSISI ISI ============ */
-
-.admin-dashboard-table thead th:nth-child(1),
-.admin-dashboard-table thead th:nth-child(3),
-.admin-dashboard-table thead th:nth-child(4),
-.admin-dashboard-table thead th:nth-child(5) {
-    text-align: center !important;
-}
-
-.admin-dashboard-table tbody td:nth-child(1),
-.admin-dashboard-table tbody td:nth-child(3),
-.admin-dashboard-table tbody td:nth-child(4),
-.admin-dashboard-table tbody td:nth-child(5) {
-    text-align: center !important;
-    vertical-align: middle;
-}
-
-.admin-dashboard-table tbody td:nth-child(4) .admin-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.admin-dashboard-table tbody td:nth-child(5) {
-    white-space: nowrap;
-}
-
-.admin-dashboard-table tbody td:nth-child(2) {
-    text-align: left;
-}
-
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 900px) {
@@ -1419,13 +1355,6 @@
 .admin-table td.text-center,
 .admin-table th.text-center {
     white-space: nowrap !important;
-}
-
-/* ============ DASHBOARD: TEKS TABEL DI TENGAH ============ */
-
-#dashboardBeritaTable .admin-table th,
-#dashboardBeritaTable .admin-table td {
-  text-align: center;
 }
 
 /* ============ SIDEBAR: LINK LIHAT WEBSITE ============ */
@@ -2201,4 +2130,266 @@
 .admin-jurusan-table .admin-action-hapus {
     padding: 7px 10px;
     margin-right: 0;
+}
+
+/* ============ POPUP GALERI (PUBLIK) ============ */
+
+.galeri-modal {
+    background-color: rgba(8, 20, 38, 0.78);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.galeri-modal .galeri-modal-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #FFFFFF;
+    font-size: 28px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: background-color 0.2s ease, transform 0.25s ease;
+}
+
+.galeri-modal .galeri-modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.32);
+    transform: rotate(90deg);
+}
+
+.galeri-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    width: min(1000px, 100%);
+    max-height: 88vh;
+    margin: auto;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.galeri-card-media {
+    background: linear-gradient(135deg, #0B2540, #123A63);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+
+.galeri-modal .galeri-card-media img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 0;
+    display: block;
+}
+
+.galeri-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 28px 28px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.galeri-card-label {
+    display: inline-block;
+    background-color: #DDEEFF;
+    color: #0F5699;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+}
+
+.galeri-card-title {
+    color: #0F5699;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 800;
+    margin: 0;
+}
+
+.galeri-card-bar {
+    display: block;
+    width: 56px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #0F5699, #CFC985);
+    margin: 16px 0;
+}
+
+.galeri-card-desc {
+    color: #4B5563;
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin: 0 0 24px;
+}
+
+.galeri-card-desc:empty {
+    display: none;
+}
+
+.galeri-card .galeri-like-btn-modal {
+    margin-top: auto;
+    align-self: flex-start;
+    background-color: #EEF5FC;
+    box-shadow: none;
+    padding: 10px 20px;
+}
+
+.galeri-card .galeri-like-btn-modal:hover {
+    background-color: #DDEEFF;
+}
+
+.galeri-card .galeri-like-btn-modal.is-liked {
+    background-color: #FEE2E2;
+}
+
+.galeri-modal.is-open .galeri-card {
+    animation: galeriCardIn 0.4s cubic-bezier(.22,1,.36,1) both;
+}
+
+.galeri-modal.is-open .galeri-card img,
+.galeri-modal.is-open .galeri-card .galeri-like-btn-modal {
+    animation: none;
+}
+
+@keyframes galeriCardIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+    .galeri-modal {
+        padding: 70px 16px 24px;
+    }
+
+    .galeri-card {
+        grid-template-columns: 1fr;
+        max-height: none;
+    }
+
+    .galeri-card-media {
+        min-height: 0;
+    }
+
+    .galeri-modal .galeri-card-media img {
+        height: auto;
+        max-height: 50vh;
+    }
+
+    .galeri-card-info {
+        padding: 22px 20px 22px;
+    }
+
+    .galeri-card-title {
+        font-size: 19px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .galeri-modal.is-open .galeri-card { animation: none; }
+}
+
+.galeri-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.galeri-card .galeri-like-btn-modal {
+    margin-top: 0;
+}
+
+.galeri-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background-color: #0F5699;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.galeri-download-btn:hover {
+    background-color: #0B4278;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.galeri-download-btn:active {
+    transform: scale(0.95);
+}
+
+.galeri-modal .galeri-card-media img {
+    -webkit-user-select: auto;
+    user-select: auto;
+    -webkit-user-drag: auto;
+}
+
+/* ============ TABEL DASHBOARD ============ */
+
+.admin-dashboard-table {
+    table-layout: fixed;
+    min-width: 0;
+    width: 100%;
+}
+
+.admin-dashboard-table th,
+.admin-dashboard-table td {
+    padding: 12px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.admin-dashboard-table th:nth-child(1),
+.admin-dashboard-table td:nth-child(1) {
+    width: 100px;
+}
+
+.admin-dashboard-table th:nth-child(3),
+.admin-dashboard-table td:nth-child(3) {
+    width: 130px;
+    white-space: nowrap;
+}
+
+.admin-dashboard-table th:nth-child(4),
+.admin-dashboard-table td:nth-child(4) {
+    width: 120px;
+}
+
+.admin-dashboard-table th:nth-child(5),
+.admin-dashboard-table td:nth-child(5) {
+    width: 90px;
+    white-space: nowrap;
+}
+
+.admin-dashboard-table td.dash-judul {
+    text-align: left;
+    padding-left: 18px;
+    padding-right: 14px;
 }

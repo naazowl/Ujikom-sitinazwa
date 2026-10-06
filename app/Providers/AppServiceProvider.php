@@ -11,7 +11,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Di hosting cPanel, isi folder "public" ada di public_html
+        // (sejajar dengan folder project). Di lokal folder ini tidak ada,
+        // jadi pengaturan bawaan Laravel tetap dipakai.
+        $hostingPublic = dirname(base_path()) . '/public_html';
+
+        if (is_dir($hostingPublic)) {
+            $this->app->usePublicPath($hostingPublic);
+        }
     }
 
     /**

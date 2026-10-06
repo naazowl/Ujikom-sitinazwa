@@ -9,7 +9,7 @@ class GaleriSeeder extends Seeder
 {
     public function run(): void
     {
-        $gambarList = ['galeri-1.JPG', 'galeri-2.jpeg'];
+        $gambarList = ['galeri-1.jpg', 'galeri-2.jpeg'];
 
         for ($i = 1; $i <= 11; $i++) {
             Galeri::create([

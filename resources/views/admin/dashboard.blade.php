@@ -125,12 +125,12 @@
 <h2 class="admin-section-title">Konten Berita &amp; Pengumuman Terbaru</h2>
 
 <div class="admin-table-wrap" id="dashboardBeritaTable">
-    <table class="admin-table">
+    <table class="admin-table admin-dashboard-table">
         <thead>
             <tr>
                 <th>Foto</th>
-                <th>Judul Artikel</th>
-                <th>Tanggal</th>
+                <th class="dash-judul">Judul Artikel</th>
+                <th class="dash-tanggal">Tanggal</th>
                 <th>Kategori</th>
                 <th>Status</th>
             </tr>
@@ -147,9 +147,9 @@
                         >
                     </td>
 
-                    <td>{{ $berita['judul'] }}</td>
+                    <td class="dash-judul">{{ $berita['judul'] }}</td>
 
-                    <td>{{ $berita['tanggal'] }}</td>
+                    <td class="dash-tanggal">{{ $berita['tanggal'] }}</td>
 
                     <td>
                         <span class="admin-badge admin-badge-{{ strtolower($berita['kategori']) }}">

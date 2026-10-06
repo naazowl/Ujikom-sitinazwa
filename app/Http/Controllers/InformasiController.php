@@ -43,9 +43,10 @@ class InformasiController extends Controller
             ->orderByDesc('tanggal')
             ->get()
             ->map(fn ($g) => [
-                'id'     => $g->id, // TAMBAHAN: dipakai tombol like
-                'judul'  => $g->judul,
-                'gambar' => $g->gambar ? 'galeri/' . $g->gambar : 'no-image.png',
+                'id'         => $g->id,
+                'judul'      => $g->judul,
+                'keterangan' => $g->keterangan,
+                'gambar'     => $g->gambar ? 'galeri/' . $g->gambar : 'no-image.png',
             ])
             ->values()
             ->all();
